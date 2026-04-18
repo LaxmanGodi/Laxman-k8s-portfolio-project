@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: portfolio
+  template:
+    metadata:
+      labels:
+        app: portfolio
+    spec:
+      containers:
+      - name: web-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        # 1. Mount the volume inside the container
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
+      # 2. Define the volume using your ConfigMap
+      volumes:
+      - name: html-volume
+        configMap:
+          name: portfolio-html
