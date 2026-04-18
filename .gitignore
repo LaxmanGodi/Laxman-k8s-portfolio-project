@@ -1,0 +1,7 @@
+# Ignore binaries
+minikube-linux-amd64
+kubectl
+
+# Ignore hidden minikube folders
+.minikube/
+.kube/
